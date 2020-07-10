@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+    
+
+<head>
+	<meta charset="UTF-8"/>
+	<title>Pesquisar Cliente</title>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+		<nav class="navbar navbar-inverse bavbar-static-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">
+				
+					<img alt="Encom" src="/images/logoPP.png"/>
+				
+					</a>			
+				</div>		
+			</div>	
+		</nav>
+	<body th:object="${cliente}">	
+	
+		<div class="panel panel-default">
+			<div class="panel-heading">	
+				<div class="clearfix">
+					<h4 class="aw-titulo-panel">Pesquisar Cliente</h4>
+					<a class="btn btn-link aw-link-panel" href="/cliente/novo">Novo cliente</a>						
+				</div>		
+					
+			</div>
+				
+			<div class="panel-bady">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center col-md-1">#</th>
+					    	<th class="text-center col-md-2">Nome</th>
+							<th class="text-center col-md-2">E-mail</th>
+							<th class="text-center col-md-2">Endereço</th>
+							<th class="text-center col-md-1">CPF / CNPJ</th>
+							<th class="text-center col-md-1">Cidade</th>
+							<th class="text-center col-md-1">Tipo</th>
+							<th class="text-center col-md-1">#</th>					
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="cliente : ${clientes}">
+							<td class="text-center" th:text="${cliente.id}">1</td>
+							<td class="text-center" th:text="${cliente.nome}"></td>
+							<td class="text-center" th:text="${cliente.email}"></td>
+							<td class="text-center" th:text="${cliente.endereco}"></td>
+							<td class="text-center" th:text="${cliente.CPF}"></td>
+							<td class="text-center" th:text="${cliente.cidade}"></td>						
+							
+							<td class="text-center" >
+								<span class="label" th:text="${cliente.tipo}" 
+										th:classappend="${#strings.toString(cliente.tipo) == 'FISICA' ? 'label-default' : 'label-primary'}" >									
+								</span>
+							</td>							
+							
+							<td class="text-center" ></td>
+						</tr>
+					
+						<td colspan="8" th:if="${#lists.isEmpty(clientes)}">Nenhum cliente foi encontrado.</td>
+					</tbody>				
+				</table>		
+			</div>			
+		</div>
+		<script src="/js/jquery-2.1.4.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+	</body>	
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+    
+
+<head>
+	<meta charset="UTF-8"/>
+	<title>Novo Cliente</title>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+
+	<nav class="navbar navbar-inverse bavbar-static-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">
+				
+					<img alt="Encom" src="/images/logoPP.png"/>
+				
+					</a>			
+				</div>		
+			</div>	
+	</nav>
+	
+<body>
+	<form class="form-horizontal" method="POST" action="/cliente" th:object="${cliente}">
+		
+		<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+	    	<span th:text="${mensagem}"></span>	
+	    </div>
+	    <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+		    <div th:each="detailedError : ${#fileds.detailedErrors()}">
+		    	<span th:insert="${detailedError.message}"></span>	
+		    </div>	    	
+	    </div>  
+	    
+	    
+		<div class="panel panel-default">
+			<div class="panel-heading">	
+				<div class="clearfix">
+					<h4 class="aw-titulo-panel">Novo cliente</h4>
+					<a class="btn btn-link aw-link-panel" href="/cliente">Pesquisar cliente</a>						
+				</div>
+			</div>
+						
+			<div class="panel-body">
+				<div class="form-group" th:classappend="${#fields.hasErrors('nome')} ? has-error">
+					<label for="nome" class="col-sm-2 control-label">Nome</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" id="nome" name="nome"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="email" class="col-sm-2 control-label">E-mail</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" id="email" name="email"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="endereco" class="col-sm-2 control-label">Endereço</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" id="endereco" name="endereco"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="CPF" class="col-sm-2 control-label">CPF / CNPJ</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" id="CPF" name="CPF"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="cidade" class="col-sm-2 control-label">Cidade</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" id="cidade" name="cidade"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="tipo" class="col-sm-2 control-label">Tipo</label>
+					<div class="col-sm-2">
+						<select class="form-control" name="tipo">						
+							<option th:each="tipo : ${todostipos}" th:value="${tipo}" th:text="${tipo.tipoCliente}"></option>											
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">					
+						<button type="submit" class="btn btn-primary">Salvar</button>					
+					</div>				
+				</div>				
+			</div>		
+		</div>	
+	</form>	
+	
+	<script src="/js/jquery-2.1.4.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+</body>			
+</html>
